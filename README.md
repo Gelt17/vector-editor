@@ -20,7 +20,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <URL вашего репозитория>
+   git clone https://github.com/Gelt17/vector-editor.git
    cd vector-editor
    ```
 
