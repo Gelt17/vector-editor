@@ -33,7 +33,7 @@ class ShapeList:
             print(str(e))
             print("Введены неккоректные параметры фигуры")
             return
-        print(f"ID: {self.id}, Фигура: {str(shape)}")
+        print(f"ID: {self.id}, Фигура: {str(self.shapelist[self.id])}")
         self.id += 1
         return self
 

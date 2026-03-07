@@ -13,11 +13,11 @@ class FileManager:
 
     @staticmethod
     def load_file(path_file: str) -> dict:
-        if path_file.endswith(".json"):
+        try:
             with open(path_file, "r", encoding="utf-8") as file:
                 loaded_data = json.load(file)
                 print(f"Данные загружены из файла {str(file.name)}")
             return loaded_data
-        else:
+        except:
             print("Неверный формат файла")
             return 
