@@ -66,7 +66,7 @@ class Square:
     
 class Oval:
     def __init__(self, center: Point, radius_1: int, radius_2: int):
-        self.center = Point
+        self.center = center
         self.radius_1 = radius_1
         self.radius_2 = radius_2
     

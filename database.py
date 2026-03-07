@@ -1,4 +1,4 @@
-from shapes import Point, Line, Circle, Square
+from shapes import Point, Line, Square, Rectangle, Oval 
 
 class ShapeList:
     def __init__(self, shapelist: dict = {}):
@@ -22,10 +22,10 @@ class ShapeList:
                 self.shapelist[self.id] = str(Square(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)))
             elif shape == 'oval':
                 x, y, r1, r2 = map(int, coordinates)
-                self.shapelist[self.id] = str(Circle(Point(x, y), r1, r2))
+                self.shapelist[self.id] = str(Oval(Point(x, y), r1, r2))
             elif shape == 'rectangle':
                 x1, y1, x2, y2, x3, y3, x4, y4 = map(int, coordinates)
-                self.shapelist[self.id] = str(Square(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)))
+                self.shapelist[self.id] = str(Rectangle(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)))
             else:
                 print("Нет такой фигуры!")
                 return 
