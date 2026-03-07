@@ -1,12 +1,11 @@
-from shapes import Point, Line, Square, Rectangle, Oval 
+from shapes import Point, Line, Square, Rectangle, Oval, Circle
 
 class ShapeList:
-    def __init__(self, shapelist: dict = {}):
-        self.shapelist = shapelist
+    def __init__(self, shapelist: dict = None):
+        self.shapelist = shapelist if shapelist is not None else {}
         self.id = 1
     
     def add_shape(self, shape: str, coordinates: list[str]):
-        print(coordinates)
         try:
             if shape == 'point':
                 x, y = map(int, coordinates)
@@ -27,10 +26,8 @@ class ShapeList:
                 x1, y1, x2, y2, x3, y3, x4, y4 = map(int, coordinates)
                 self.shapelist[self.id] = str(Rectangle(Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4)))
             else:
-                print("Нет такой фигуры!")
-                return 
-        except Exception as e:
-            print(str(e))
+                raise IndexError("Нет такой фигуры!") 
+        except:
             print("Введены неккоректные параметры фигуры")
             return
         print(f"ID: {self.id}, Фигура: {str(self.shapelist[self.id])}")
@@ -44,11 +41,9 @@ class ShapeList:
                 del self.shapelist[id]
                 print(f"Фигура с ID {id} удалена.")
             else:
-                print("Неверное ID")
-                return
+                raise IndexError("Нет такого индекса!")
         except:
-            print("Неверный формат ID")
-            return
+            raise ValueError("Введите корректный формат индекса")
 
     def get_list_shape(self):
         print("-"*100)

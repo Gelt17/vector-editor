@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, isclose
 
 class Point:
     def __init__(self, x: int, y: int):
@@ -23,12 +23,17 @@ class Line:
         self.point_1 = point_1
         self.point_2 = point_2
 
-    def __len__(self) -> float:
+    def length(self) -> float:
         point = self.point_1 - self.point_2
         return sqrt(point.x ** 2 + point.y ** 2)
+    
+    def __eq__(self, other):
+        if isinstance(other, Line):
+            return isclose(self.length(), other.length(), rel_tol=1e-9)
+        return NotImplemented
 
     def __str__(self) -> str:
-        return f"Линия c координатами ({self.point_1.x, self.point_1.y}), ({self.point_2.x, self.point_2.y})"
+        return f"Линия c координатами ({self.point_1.x}, {self.point_1.y}), ({self.point_2.x}, {self.point_2.y})"
 
 class Circle:
     def __init__(self, center: Point, radius: int):
@@ -36,7 +41,7 @@ class Circle:
         self.radius = radius
     
     def __str__(self) -> str:
-        return f"Окружность с центром ({self.center.x, self.center.y}) и радиусом {self.radius}"
+        return f"Окружность с центром ({self.center.x}, {self.center.y}) и радиусом {self.radius}"
     
 class Square:
     def __new__(cls, point_1: Point, point_2: Point, point_3: Point, point_4: Point):
@@ -48,7 +53,7 @@ class Square:
         line_d2 = Line(point_2, point_4)
 
 
-        if line_1.__len__() == line_2.__len__() == line_3.__len__() == line_4.__len__() and line_d1.__len__() == line_d2.__len__():
+        if line_1 == line_2 == line_3 == line_4 and line_d1 == line_d2:
             return super().__new__(cls)
         else:
             raise ValueError("Введите валидные данные")
@@ -62,7 +67,7 @@ class Square:
         self.line = Line(point_1, point_2)
     
     def __str__(self) -> str:
-        return f"Квадрат с координатами ({self.point_1.x, self.point_1.y}), ({self.point_2.x, self.point_2.y}), ({self.point_3.x, self.point_3.y}), ({self.point_4.x, self.point_4.y})"
+        return f"Квадрат с координатами ({self.point_1.x}, {self.point_1.y}), ({self.point_2.x}, {self.point_2.y}), ({self.point_3.x}, {self.point_3.y}), ({self.point_4.x}, {self.point_4.y})"
     
 class Oval:
     def __init__(self, center: Point, radius_1: int, radius_2: int):
@@ -83,7 +88,7 @@ class Rectangle:
         line_d2 = Line(point_2, point_4)
 
 
-        if line_1.__len__() == line_3.__len__() and line_2.__len__() == line_4.__len__() and line_d1.__len__() == line_d2.__len__():
+        if line_1 == line_3 and line_2 == line_4 and line_d1 == line_d2:
             return super().__new__(cls)
         else:
             raise ValueError("Введите валидные данные")
@@ -98,4 +103,4 @@ class Rectangle:
 
     
     def __str__(self) -> str:
-        return f"Квадрат с координатами ({self.point_1.x, self.point_1.y}), ({self.point_2.x, self.point_2.y}), ({self.point_3.x, self.point_3.y}), ({self.point_4.x, self.point_4.y})"
+        return f"Прямоугольник с координатами ({self.point_1.x}, {self.point_1.y}), ({self.point_2.x}, {self.point_2.y}), ({self.point_3.x}, {self.point_3.y}), ({self.point_4.x}, {self.point_4.y})"

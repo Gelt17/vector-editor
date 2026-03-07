@@ -8,16 +8,14 @@ class FileManager:
                 json.dump(database, file, ensure_ascii=False)
                 print(f"Данные записаны в файл {str(file.name)}")
         else:
-            print("Неверный формат файла")
-            return 
+            raise ValueError("Указан невеный формат файла")
 
     @staticmethod
     def load_file(path_file: str) -> dict:
-        try:
+        if path_file.endswith(".json"):
             with open(path_file, "r", encoding="utf-8") as file:
                 loaded_data = json.load(file)
                 print(f"Данные загружены из файла {str(file.name)}")
             return loaded_data
-        except:
-            print("Неверный формат файла")
-            return 
+        else:
+            raise ValueError("Указан невеный формат файла")

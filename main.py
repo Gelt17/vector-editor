@@ -19,23 +19,28 @@ def main():
                     exit - выход"""
     print("Вас привествует векторный редактор версии 0.02.\n Для вывода списка всех команд, введите help")
     while True:
-        command = input("Введите команду: ").split()
-        if command[0] == "add":
-            shape_list.add_shape(command[1], command[2:])
-        elif command[0] == "list":
-            shape_list.get_list_shape()
-        elif command[0] == "delete":
-            shape_list.delete_shape(command[1])
-        elif command[0] == "help":
-            print(help_list)
-        elif command[0] == "load":
-            shape_list = ShapeList(FileManager.load_file(command[1]))
-        elif command[0] == "save":
-            FileManager.save_file(shape_list.shapelist, command[1])
-        elif command[0] == "exit":
-            break
-        else:
-            print("Неверно введенная команда")
+        try:
+            command = input("Введите команду: ").split()
+            if command[0] == "add":
+                shape_list.add_shape(command[1], command[2:])
+            elif command[0] == "list":
+                shape_list.get_list_shape()
+            elif command[0] == "delete":
+                shape_list.delete_shape(command[1])
+            elif command[0] == "help":
+                print(help_list)
+            elif command[0] == "load":
+                shape_list = ShapeList(FileManager.load_file(command[1]))
+            elif command[0] == "save":
+                FileManager.save_file(shape_list.shapelist, command[1])
+            elif command[0] == "exit":
+                break
+            else:
+                print("Неверно введенная команда")
+        except IndexError as e:
+            print(str(e))
+        except ValueError as e:
+            print(str(e))
 
 if __name__ == "__main__":
     main()
